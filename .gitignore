@@ -1,0 +1,13 @@
+# Fichiers générés par Gradle / Android Studio (jamais versionnés)
+.gradle/
+.idea/
+*.iml
+/local.properties
+/build/
+/app/build/
+/captures/
+.externalNativeBuild/
+.cxx/
+.DS_Store
+*.apk
+*.aab

@@ -1,0 +1,6 @@
+<resources>
+    <!-- Palette "salle de cinéma" : bleu nuit + or des fauteuils -->
+    <color name="night_blue">#1C2340</color>
+    <color name="cinema_gold">#E0A526</color>
+    <color name="screen_white">#FAF8F3</color>
+</resources>

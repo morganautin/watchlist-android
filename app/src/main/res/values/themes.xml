@@ -1,0 +1,7 @@
+<resources>
+    <!-- Thème Material 3 ; DayNight permettra le mode sombre (préférence DataStore) -->
+    <style name="Theme.WatchList" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/night_blue</item>
+        <item name="colorSecondary">@color/cinema_gold</item>
+    </style>
+</resources>
