@@ -1,0 +1,4 @@
+<resources>
+    <!-- Mode sombre : barre du haut encore plus foncée -->
+    <color name="toolbar_bg">#0F1426</color>
+</resources>
