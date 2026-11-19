@@ -3,6 +3,7 @@ package fr.estiam.watchlist.ui.movie
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -111,6 +112,8 @@ class MovieDetailActivity : AppCompatActivity() {
      */
     private fun chooseLists() {
         val lists = vm.watchlists.value
+        // Trace Logcat (filtre : MovieDetail) — sert au bug n° 1 de docs/DEBUGGING.md
+        Log.d("MovieDetail", "Ajouter à une liste : ${lists.size} liste(s) disponible(s)")
         if (lists.isEmpty()) {
             // Aucune liste : on propose directement d'en créer une.
             showWatchlistDialog(R.string.new_list) { name, description -> vm.createListAndAdd(name, description) }
