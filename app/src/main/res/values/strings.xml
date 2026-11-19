@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">WatchList</string>
     <string name="welcome">WatchList est prêt.\nLe catalogue de films arrive bientôt.</string>
+    <!-- Étape 2 : %1$d = nombre de films, %2$d = nombre de favoris -->
+    <string name="database_ready">Base de données prête\n%1$d films · %2$d favoris</string>
 </resources>
