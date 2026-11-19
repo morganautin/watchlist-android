@@ -3,6 +3,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <!-- Icônes visibles dans la barre du haut : navigation vers les autres écrans -->
+    <item
+        android:id="@+id/action_lists"
+        android:icon="@drawable/ic_list"
+        android:title="@string/my_lists"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_stats"
+        android:icon="@drawable/ic_stats"
+        android:title="@string/statistics"
+        app:showAsAction="ifRoom" />
+
     <item
         android:id="@+id/action_favorites"
         android:checkable="true"

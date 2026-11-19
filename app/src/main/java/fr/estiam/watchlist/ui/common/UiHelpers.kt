@@ -13,6 +13,7 @@ import androidx.core.view.updatePadding
 import fr.estiam.watchlist.R
 import fr.estiam.watchlist.model.Genre
 import fr.estiam.watchlist.model.MovieError
+import fr.estiam.watchlist.model.WatchStatus
 
 /*
  * Petites fonctions partagées par tous les écrans :
@@ -47,6 +48,14 @@ fun Genre.color(): Int = when (this) {
     Genre.ROMANCE -> 0xFFD35486.toInt()         // rose
     Genre.SCIENCE_FICTION -> 0xFF1C2340.toInt() // bleu nuit
     Genre.THRILLER -> 0xFF6D4C41.toInt()        // brun
+}
+
+/** Libellé affiché d'un statut de visionnage. */
+@StringRes
+fun WatchStatus.labelRes(): Int = when (this) {
+    WatchStatus.TO_WATCH -> R.string.status_to_watch
+    WatchStatus.WATCHING -> R.string.status_watching
+    WatchStatus.WATCHED -> R.string.status_watched
 }
 
 /** Message d'erreur affiché sous un champ du formulaire. */

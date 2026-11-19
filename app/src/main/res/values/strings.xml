@@ -68,4 +68,56 @@
     <string name="error_rating">La note doit être comprise entre 1 et 5.</string>
     <string name="error_genre">Choisissez un genre.</string>
     <string name="error_generic">Valeur invalide.</string>
+
+    <!-- Statuts de visionnage (WatchStatus) -->
+    <string name="status_to_watch">À voir</string>
+    <string name="status_watching">En cours</string>
+    <string name="status_watched">Vu</string>
+
+    <!-- Mes listes -->
+    <string name="my_lists">Mes listes</string>
+    <string name="new_list">Nouvelle liste</string>
+    <string name="lists_empty">Aucune liste pour l\'instant.\nCréez-en une avec le bouton « Nouvelle liste ».</string>
+    <string name="list_name">Nom de la liste *</string>
+    <string name="list_description">Description</string>
+    <string name="error_list_name">Le nom est obligatoire (50 caractères maximum).</string>
+    <!-- %1$d = films vus, %2$d = total, %3$d = pourcentage -->
+    <string name="list_progress">%1$d / %2$d films vus · %3$d %%</string>
+    <string name="list_created">Liste « %1$s » créée</string>
+    <string name="list_error">Impossible d\'enregistrer la liste.</string>
+
+    <!-- Détail d'une liste -->
+    <string name="list_detail_empty">Cette liste est vide.\nOuvrez un film du catalogue et touchez « Ajouter à une liste ».</string>
+    <string name="rename_list">Modifier la liste</string>
+    <string name="delete_list">Supprimer la liste</string>
+    <string name="delete_list_message">La liste « %1$s » sera supprimée. Les films restent dans le catalogue.</string>
+    <string name="list_deleted">Liste supprimée</string>
+    <string name="list_not_found">Cette liste n\'existe plus.</string>
+    <string name="remove_from_list">Retirer de la liste</string>
+    <string name="change_status">Changer le statut</string>
+
+    <!-- Ajouter un film à une liste (écran détail) -->
+    <string name="add_to_list">Ajouter à une liste</string>
+    <string name="choose_lists">Dans quelles listes ?</string>
+    <string name="new_list_ellipsis">Nouvelle liste…</string>
+    <string name="done">Terminé</string>
+    <!-- Pluriels : "Dans 1 liste" / "Dans 3 listes" -->
+    <plurals name="in_lists">
+        <item quantity="one">Dans %d liste</item>
+        <item quantity="other">Dans %d listes</item>
+    </plurals>
+    <string name="in_no_list">Dans aucune liste</string>
+
+    <!-- Statistiques -->
+    <string name="statistics">Statistiques</string>
+    <string name="stat_movies">Films</string>
+    <string name="stat_favorites">Favoris</string>
+    <string name="stat_average">Note moyenne</string>
+    <string name="stat_by_genre">Par genre</string>
+    <string name="stat_by_status">Par statut (toutes listes)</string>
+    <string name="stat_none">—</string>
+    <string name="stats_empty">Aucun film dans le catalogue.</string>
+    <!-- %1$d = nombre de films, %2$s = note moyenne du genre -->
+    <string name="genre_stat_value">%1$d · ★ %2$s</string>
+    <string name="genre_stat_value_no_rating">%1$d</string>
 </resources>
