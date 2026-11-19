@@ -40,8 +40,8 @@ Légende : ✅ fait · 🔄 en cours · ⬜ à faire
 - ✅ Données cohérentes après modification (CASCADE + mise à jour automatique)
 
 ## Débogage et tests (20 %)
-- 🔄 Utiliser Logcat, points d'arrêt et inspection des variables (procédure dans `docs/DEBUGGING.md`, captures à ajouter dans `docs/debug/`)
-- 🔄 Documenter 2 bugs (cause + solution) — rédigés dans `docs/DEBUGGING.md`, captures à ajouter
+- ✅ Utiliser Logcat, points d'arrêt et inspection des variables (captures dans `docs/debug/`)
+- ✅ Documenter 2 bugs (cause + solution) — `docs/DEBUGGING.md`
 - ✅ Au moins 8 tests JUnit (14 écrits : validation, import JSON, formulaire, préférences)
 - ✅ Au moins 3 tests Espresso (formulaire, parcours film, parcours liste)
 - ✅ Tous les tests lançables depuis le projet rendu (14 JUnit + 3 Espresso verts sur émulateur)

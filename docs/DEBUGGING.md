@@ -48,11 +48,12 @@ Or l'écran ne fait que lire `.value` au moment du clic, sans observer : la requ
 et la valeur restait la valeur initiale `emptyList()`.
 
 **Solution.** Démarrer l'observation dès la création du ViewModel :
-`SharingStarted.Eagerly`. La valeur est alors toujours à jour au moment du clic.
+`SharingStarted.Eagerly`. La valeur est alors toujours à jour au moment du clic,
+et la boîte « Dans quelles listes ? » propose bien les listes existantes.
 
 | Avant | Après |
 |---|---|
-| ![point d'arrêt](debug/bug1-breakpoint.png) | ![corrigé](debug/bug1-corrige.png) |
+| ![point d'arrêt : lists vide](debug/bug1-breakpoint.png) | ![corrigé : les listes sont proposées](debug/bug1-corrige.png) |
 
 ---
 
