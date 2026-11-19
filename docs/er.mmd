@@ -1,0 +1,27 @@
+erDiagram
+    MOVIES ||--o{ WATCHLIST_ITEMS : "est dans"
+    WATCHLISTS ||--o{ WATCHLIST_ITEMS : "contient"
+    MOVIES {
+        String id PK "movie_001 ou UUID"
+        String title
+        Int year
+        Genre genre
+        Int durationMinutes
+        String director
+        String synopsis
+        Int rating "1 à 5, null = non noté"
+        Boolean isFavorite
+        Long updatedAt
+    }
+    WATCHLISTS {
+        Long id PK "auto-généré"
+        String name
+        String description
+        Long createdAt
+    }
+    WATCHLIST_ITEMS {
+        Long watchlistId PK,FK "CASCADE"
+        String movieId PK,FK "CASCADE"
+        WatchStatus status "TO_WATCH / WATCHING / WATCHED"
+        Long addedAt
+    }
