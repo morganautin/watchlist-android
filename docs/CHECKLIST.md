@@ -15,18 +15,18 @@ Légende : ✅ fait · 🔄 en cours · ⬜ à faire
 ## Room et architecture (25 %)
 - ✅ 3 entités reliées : Movie, Watchlist, WatchlistItem (étape 1)
 - ⬜ 2 CRUD complets : films + listes
-- ⬜ DAO et Repositories (contrats ✅, implémentation Room ⬜)
+- ✅ DAO et Repositories : `MovieDao`, `WatchlistDao`, implémentations Room (étape 2)
 - ⬜ ViewModels pour l'état des écrans
-- ⬜ Observation réactive avec Flow
-- ⬜ Paging 3 sur le catalogue
-- ⬜ Recherche, filtre et tri
-- ⬜ Données conservées après relance
+- 🔄 Observation réactive avec Flow (côté données ✅, côté écrans à l'étape 3)
+- 🔄 Paging 3 sur le catalogue (requête Room ✅, écran à l'étape 3)
+- 🔄 Recherche, filtre et tri (requête SQL ✅, écran à l'étape 3)
+- 🔄 Données conservées après relance (Room ✅, à démontrer sur émulateur)
 
 ## Import JSON (dans les 15 %)
-- ⬜ Fichier `assets/movies.json` avec au moins 20 films valides
-- ⬜ Validation avant insertion (`Movie.validate()` ✅)
-- ⬜ Import une seule fois
-- ⬜ Ni doublons, ni écrasement des modifications de l'utilisateur
+- ✅ Fichier `assets/movies.json` : 30 films valides + 3 entrées piégées
+- ✅ Validation avant insertion (`MovieJsonParser` + `Movie.validate()`)
+- ✅ Import une seule fois (marqueur dans la table `app_meta`, transaction)
+- ✅ Ni doublons, ni écrasement (`OnConflictStrategy.IGNORE`)
 
 ## DataStore (dans les 15 %)
 - ⬜ 3 préférences persistantes (thème, tri par défaut, masquer les vus)
@@ -35,14 +35,14 @@ Légende : ✅ fait · 🔄 en cours · ⬜ à faire
 - ⬜ Conservées après relance
 
 ## Fonctionnalités métier
-- ⬜ Statistiques par genre et par statut
-- ⬜ Progression de chaque liste (% de films vus)
+- 🔄 Statistiques par genre et par statut (requêtes ✅, écran à faire)
+- 🔄 Progression de chaque liste (requête ✅, écran à faire)
 - ⬜ Données cohérentes après modification (CASCADE ✅)
 
 ## Débogage et tests (20 %)
 - ⬜ Utiliser Logcat, points d'arrêt et inspection des variables (garder des captures !)
 - ⬜ Documenter 2 bugs (cause + solution) — 1 par membre
-- 🔄 Au moins 8 tests JUnit (6 écrits à l'étape 1)
+- ✅ Au moins 8 tests JUnit (9 écrits : validation + import JSON)
 - ⬜ Au moins 3 tests Espresso
 - ⬜ Tous les tests lançables depuis le projet rendu
 
