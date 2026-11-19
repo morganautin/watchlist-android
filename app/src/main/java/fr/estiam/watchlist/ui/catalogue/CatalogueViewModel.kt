@@ -13,6 +13,7 @@ import androidx.paging.cachedIn
 import fr.estiam.watchlist.R
 import fr.estiam.watchlist.WatchListApplication
 import fr.estiam.watchlist.data.MovieRepository
+import fr.estiam.watchlist.data.SettingsRepository
 import fr.estiam.watchlist.model.CatalogueQuery
 import fr.estiam.watchlist.model.Genre
 import fr.estiam.watchlist.model.Movie
@@ -23,13 +24,14 @@ import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -40,14 +42,28 @@ import kotlinx.coroutines.launch
  * c'est pour ça que les critères ne sont pas perdus quand on tourne le téléphone.
  */
 @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
-class CatalogueViewModel(private val repository: MovieRepository) : ViewModel() {
+class CatalogueViewModel(
+    private val repository: MovieRepository,
+    private val settingsRepository: SettingsRepository
+) : ViewModel() {
 
     // Texte de recherche, séparé des filtres pour pouvoir lui appliquer un délai (debounce).
     private val searchText = MutableStateFlow("")
 
-    // Genre, favoris et tri. L'écran l'observe pour cocher les bons éléments.
+    // Filtres propres à cet écran : genre et favoris.
     private val _filters = MutableStateFlow(CatalogueQuery())
-    val filters: StateFlow<CatalogueQuery> = _filters.asStateFlow()
+
+    /**
+     * Filtres complets = filtres de l'écran + 2 PRÉFÉRENCES DataStore :
+     *  - tri par défaut (pref_default_sort) ;
+     *  - masquer les films vus (pref_hide_watched).
+     * Si une préférence change (ici ou dans « Paramètres »), le catalogue se recharge tout seul.
+     * L'écran l'observe aussi pour cocher les bons éléments du menu.
+     */
+    val filters: StateFlow<CatalogueQuery> =
+        combine(_filters, settingsRepository.settings) { filters, prefs ->
+            filters.copy(sort = prefs.defaultSort, hideWatched = prefs.hideWatched)
+        }.stateIn(viewModelScope, SharingStarted.Eagerly, CatalogueQuery())
 
     /**
      * Le catalogue paginé (Paging 3).
@@ -57,7 +73,7 @@ class CatalogueViewModel(private val repository: MovieRepository) : ViewModel() 
      * 4. cachedIn : garde les pages déjà chargées (rotation de l'écran = pas de rechargement).
      */
     val movies: Flow<PagingData<Movie>> =
-        combine(searchText.debounce(300), _filters) { search, filters -> filters.copy(search = search) }
+        combine(searchText.debounce(300), filters) { search, filters -> filters.copy(search = search) }
             .distinctUntilChanged()
             .flatMapLatest { query ->
                 Pager(PagingConfig(pageSize = 20, enablePlaceholders = false)) {
@@ -90,7 +106,10 @@ class CatalogueViewModel(private val repository: MovieRepository) : ViewModel() 
 
     fun setFavoritesOnly(only: Boolean) = _filters.update { it.copy(favoritesOnly = only) }
 
-    fun setSort(sort: MovieSort) = _filters.update { it.copy(sort = sort) }
+    /** Le tri choisi dans le menu est ENREGISTRÉ comme tri par défaut (conservé après relance). */
+    fun setSort(sort: MovieSort) {
+        viewModelScope.launch { settingsRepository.setDefaultSort(sort) }
+    }
 
     companion object {
         private const val TAG = "CatalogueVM"
@@ -99,7 +118,7 @@ class CatalogueViewModel(private val repository: MovieRepository) : ViewModel() 
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
                 val app = this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as WatchListApplication
-                CatalogueViewModel(app.movies)
+                CatalogueViewModel(app.movies, app.settings)
             }
         }
     }

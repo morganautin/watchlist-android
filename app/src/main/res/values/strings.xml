@@ -120,4 +120,15 @@
     <!-- %1$d = nombre de films, %2$s = note moyenne du genre -->
     <string name="genre_stat_value">%1$d · ★ %2$s</string>
     <string name="genre_stat_value_no_rating">%1$d</string>
+
+    <!-- Paramètres (préférences DataStore) -->
+    <string name="settings">Paramètres</string>
+    <string name="pref_theme_title">Thème</string>
+    <string name="theme_system">Système</string>
+    <string name="theme_light">Clair</string>
+    <string name="theme_dark">Sombre</string>
+    <string name="pref_sort_title">Tri par défaut du catalogue</string>
+    <string name="pref_hide_watched">Masquer les films vus</string>
+    <string name="pref_hide_watched_summary">Les films marqués « Vu » dans au moins une liste n\'apparaissent plus dans le catalogue.</string>
+    <string name="hidden_watched_subtitle">Films vus masqués</string>
 </resources>
