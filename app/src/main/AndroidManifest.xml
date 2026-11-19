@@ -48,5 +48,11 @@
             android:name=".ui.stats.StatisticsActivity"
             android:exported="false"
             android:parentActivityName=".ui.catalogue.CatalogueActivity" />
+
+        <!-- ÉCRAN 7 — Paramètres -->
+        <activity
+            android:name=".ui.settings.SettingsActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.catalogue.CatalogueActivity" />
     </application>
 </manifest>

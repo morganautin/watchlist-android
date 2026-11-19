@@ -21,8 +21,12 @@ android {
     compileOptions { sourceCompatibility = JavaVersion.VERSION_17; targetCompatibility = JavaVersion.VERSION_17 }
     kotlinOptions { jvmTarget = "17" }
     packaging { resources { excludes += "/META-INF/{AL2.0,LGPL2.1}" } }
-    // Les tests JUnit peuvent appeler des classes Android sans planter (valeurs par défaut)
-    testOptions { unitTests.isReturnDefaultValues = true }
+    testOptions {
+        // Les tests JUnit peuvent appeler des classes Android sans planter (valeurs par défaut)
+        unitTests.isReturnDefaultValues = true
+        // Tests Espresso : animations désactivées sur l'émulateur pendant les tests (plus fiables)
+        animationsDisabled = true
+    }
 }
 
 dependencies {
@@ -60,5 +64,4 @@ dependencies {
     androidTestImplementation("androidx.test:runner:1.6.2")
     androidTestImplementation("androidx.test:rules:1.6.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
-    androidTestImplementation("androidx.test.espresso:espresso-contrib:3.6.1") // actions sur RecyclerView
 }

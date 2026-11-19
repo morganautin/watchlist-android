@@ -3,6 +3,7 @@ package fr.estiam.watchlist.ui.movie
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -93,6 +94,8 @@ class MovieFormActivity : AppCompatActivity() {
 
     /** Copie le film d'origine dans les champs (mode modification). */
     private fun fillFields(movie: Movie) {
+        // Trace visible dans Logcat (filtre : MovieForm) — sert au bug n° 2 de docs/DEBUGGING.md
+        Log.d(TAG, "Remplissage des champs avec « ${movie.title} »")
         b.titleInput.setText(movie.title)
         b.yearInput.setText(movie.year.toString())
         b.durationInput.setText(movie.durationMinutes.toString())
@@ -137,6 +140,8 @@ class MovieFormActivity : AppCompatActivity() {
     }
 
     companion object {
+        private const val TAG = "MovieForm"
+
         /** Intent pour MODIFIER un film existant (sans id = ajout). */
         fun intent(context: Context, movieId: String): Intent =
             Intent(context, MovieFormActivity::class.java)

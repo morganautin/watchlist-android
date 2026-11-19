@@ -4,7 +4,7 @@ Rendu et présentation : **jeudi 26 novembre 2026, 16h**.
 Légende : ✅ fait · 🔄 en cours · ⬜ à faire
 
 ## Interface et navigation (20 %)
-- ✅ Au moins 5 écrans fonctionnels — 6/7 faits (catalogue, détail film, formulaire film, mes listes, détail liste, statistiques) ; reste paramètres (étape 4)
+- ✅ Au moins 5 écrans fonctionnels — 7 écrans (catalogue, détail film, formulaire film, mes listes, détail liste, statistiques, paramètres)
 - ✅ Navigation entre les écrans (icônes de la barre du haut + flèche retour)
 - ✅ `RecyclerView` pour les collections (catalogue, listes, films d'une liste)
 - ✅ Formulaires avec contrôles de saisie (film + liste)
@@ -29,10 +29,10 @@ Légende : ✅ fait · 🔄 en cours · ⬜ à faire
 - ✅ Ni doublons, ni écrasement (`OnConflictStrategy.IGNORE`)
 
 ## DataStore (dans les 15 %)
-- ⬜ 3 préférences persistantes (thème, tri par défaut, masquer les vus)
-- ⬜ Au moins 2 visibles (thème, tri)
-- ⬜ Mise à jour sans rafraîchissement manuel
-- ⬜ Conservées après relance
+- ✅ 3 préférences persistantes (thème, tri par défaut, masquer les vus)
+- ✅ Au moins 2 visibles (thème de toute l'app, ordre du catalogue ; + films vus masqués)
+- ✅ Mise à jour sans rafraîchissement manuel (Flow DataStore)
+- 🔄 Conservées après relance (DataStore ✅, à démontrer sur émulateur)
 
 ## Fonctionnalités métier
 - ✅ Statistiques par genre et par statut (écran Statistiques)
@@ -40,11 +40,11 @@ Légende : ✅ fait · 🔄 en cours · ⬜ à faire
 - ✅ Données cohérentes après modification (CASCADE + mise à jour automatique)
 
 ## Débogage et tests (20 %)
-- ⬜ Utiliser Logcat, points d'arrêt et inspection des variables (garder des captures !)
-- ⬜ Documenter 2 bugs (cause + solution) — 1 par membre
-- ✅ Au moins 8 tests JUnit (11 écrits : validation, import JSON, formulaire)
-- ⬜ Au moins 3 tests Espresso
-- ⬜ Tous les tests lançables depuis le projet rendu
+- 🔄 Utiliser Logcat, points d'arrêt et inspection des variables (procédure dans `docs/DEBUGGING.md`, captures à ajouter dans `docs/debug/`)
+- 🔄 Documenter 2 bugs (cause + solution) — rédigés dans `docs/DEBUGGING.md`, captures à ajouter
+- ✅ Au moins 8 tests JUnit (14 écrits : validation, import JSON, formulaire, préférences)
+- ✅ Au moins 3 tests Espresso (formulaire, parcours film, parcours liste)
+- 🔄 Tous les tests lançables depuis le projet rendu (à vérifier sur émulateur)
 
 ## Équipe et qualité (10 %)
 - ⚠️ Équipe de 3 à 4 demandée — projet réalisé seul : à faire valider par le prof

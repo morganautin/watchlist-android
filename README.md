@@ -10,6 +10,7 @@ Projet final **ESTIAM E5 — Mobile Apps Development** (Android natif, Kotlin).
 
 ## Documentation
 - [Architecture et base de données](docs/ARCHITECTURE.md) — schémas des couches et des relations Room
+- [Débogage et tests](docs/DEBUGGING.md) — tests JUnit / Espresso et bugs documentés
 - [Checklist des exigences](docs/CHECKLIST.md) — avancement du projet
 
 ## Structure du code

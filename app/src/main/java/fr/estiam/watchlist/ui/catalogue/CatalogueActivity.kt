@@ -24,6 +24,7 @@ import fr.estiam.watchlist.ui.common.enableCinemaEdgeToEdge
 import fr.estiam.watchlist.ui.common.labelRes
 import fr.estiam.watchlist.ui.movie.MovieDetailActivity
 import fr.estiam.watchlist.ui.movie.MovieFormActivity
+import fr.estiam.watchlist.ui.settings.SettingsActivity
 import fr.estiam.watchlist.ui.stats.StatisticsActivity
 import fr.estiam.watchlist.ui.watchlist.WatchlistsActivity
 import kotlinx.coroutines.flow.collectLatest
@@ -91,8 +92,11 @@ class CatalogueActivity : AppCompatActivity() {
                 launch {
                     vm.filters.collect { filters ->
                         invalidateOptionsMenu()
-                        supportActionBar?.subtitle =
-                            if (filters.favoritesOnly) getString(R.string.favorites_only) else null
+                        // Sous-titre : rappelle les filtres actifs (dont la préférence « masquer les vus »)
+                        supportActionBar?.subtitle = listOfNotNull(
+                            getString(R.string.favorites_only).takeIf { filters.favoritesOnly },
+                            getString(R.string.hidden_watched_subtitle).takeIf { filters.hideWatched }
+                        ).joinToString(" · ").ifEmpty { null }
                     }
                 }
 
@@ -157,6 +161,7 @@ class CatalogueActivity : AppCompatActivity() {
         // Navigation vers les autres écrans
         R.id.action_lists -> { startActivity(Intent(this, WatchlistsActivity::class.java)); true }
         R.id.action_stats -> { startActivity(Intent(this, StatisticsActivity::class.java)); true }
+        R.id.action_settings -> { startActivity(Intent(this, SettingsActivity::class.java)); true }
         // Filtres et tri
         R.id.action_favorites -> { vm.setFavoritesOnly(!item.isChecked); true }
         R.id.sort_title -> { vm.setSort(MovieSort.TITLE); true }
