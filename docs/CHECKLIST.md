@@ -44,7 +44,7 @@ Légende : ✅ fait · 🔄 en cours · ⬜ à faire
 - 🔄 Documenter 2 bugs (cause + solution) — rédigés dans `docs/DEBUGGING.md`, captures à ajouter
 - ✅ Au moins 8 tests JUnit (14 écrits : validation, import JSON, formulaire, préférences)
 - ✅ Au moins 3 tests Espresso (formulaire, parcours film, parcours liste)
-- 🔄 Tous les tests lançables depuis le projet rendu (à vérifier sur émulateur)
+- ✅ Tous les tests lançables depuis le projet rendu (14 JUnit + 3 Espresso verts sur émulateur)
 
 ## Équipe et qualité (10 %)
 - ⚠️ Équipe de 3 à 4 demandée — projet réalisé seul : à faire valider par le prof
