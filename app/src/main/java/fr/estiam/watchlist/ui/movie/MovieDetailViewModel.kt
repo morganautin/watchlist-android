@@ -8,7 +8,9 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import fr.estiam.watchlist.WatchListApplication
 import fr.estiam.watchlist.data.MovieRepository
+import fr.estiam.watchlist.data.WatchlistRepository
 import fr.estiam.watchlist.model.Movie
+import fr.estiam.watchlist.model.WatchlistSummary
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
@@ -29,6 +31,7 @@ sealed interface MovieDetailState {
  */
 class MovieDetailViewModel(
     private val repository: MovieRepository,
+    private val watchlistRepository: WatchlistRepository,
     private val movieId: String
 ) : ViewModel() {
 
@@ -39,6 +42,34 @@ class MovieDetailViewModel(
     val state: StateFlow<MovieDetailState> = repository.observeMovie(movieId)
         .map { movie -> if (movie == null) MovieDetailState.NotFound else MovieDetailState.Loaded(movie) }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), MovieDetailState.Loading)
+
+    /**
+     * Toutes les listes (pour la boîte « Ajouter à une liste »).
+     * Eagerly : observées dès la création du ViewModel, car l'écran ne lit
+     * cette valeur qu'au moment du clic (sans la "collecter" en continu).
+     */
+    val watchlists: StateFlow<List<WatchlistSummary>> = watchlistRepository.observeSummaries()
+        .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
+
+    /** Ids des listes qui contiennent déjà ce film (cases cochées). */
+    val memberListIds: StateFlow<List<Long>> = watchlistRepository.observeWatchlistIdsForMovie(movieId)
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
+
+    /** Coche / décoche une liste dans la boîte « Ajouter à une liste ». */
+    fun setInList(watchlistId: Long, inList: Boolean) {
+        viewModelScope.launch {
+            if (inList) watchlistRepository.addMovie(watchlistId, movieId)
+            else watchlistRepository.removeMovie(watchlistId, movieId)
+        }
+    }
+
+    /** « Nouvelle liste… » : crée la liste puis y ajoute directement le film. */
+    fun createListAndAdd(name: String, description: String) {
+        viewModelScope.launch {
+            val newId = watchlistRepository.createWatchlist(name, description)
+            watchlistRepository.addMovie(newId, movieId)
+        }
+    }
 
     /** Inverse le statut favori du film affiché. */
     fun toggleFavorite() {
@@ -65,7 +96,7 @@ class MovieDetailViewModel(
                 // SavedStateHandle contient automatiquement les "extras" de l'Intent qui a ouvert l'écran.
                 val movieId = createSavedStateHandle().get<String>(EXTRA_MOVIE_ID)
                     ?: error("MovieDetailActivity doit recevoir un id de film")
-                MovieDetailViewModel(app.movies, movieId)
+                MovieDetailViewModel(app.movies, app.watchlists, movieId)
             }
         }
     }

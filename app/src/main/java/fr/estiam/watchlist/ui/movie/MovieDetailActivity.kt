@@ -19,6 +19,7 @@ import fr.estiam.watchlist.ui.common.color
 import fr.estiam.watchlist.ui.common.enableCinemaEdgeToEdge
 import fr.estiam.watchlist.ui.common.formatDuration
 import fr.estiam.watchlist.ui.common.labelRes
+import fr.estiam.watchlist.ui.common.showWatchlistDialog
 import kotlinx.coroutines.launch
 
 /**
@@ -57,10 +58,18 @@ class MovieDetailActivity : AppCompatActivity() {
             startActivity(MovieFormActivity.intent(this, id))
         }
         b.deleteButton.setOnClickListener { confirmDelete() }
+        b.addToListButton.setOnClickListener { chooseLists() }
 
         // Observation de l'état : l'écran se redessine à chaque changement en base.
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
+                // Texte « Dans 2 listes », mis à jour à chaque ajout / retrait
+                launch {
+                    vm.memberListIds.collect { ids ->
+                        b.listsText.text = if (ids.isEmpty()) getString(R.string.in_no_list)
+                        else resources.getQuantityString(R.plurals.in_lists, ids.size, ids.size)
+                    }
+                }
                 vm.state.collect { state ->
                     when (state) {
                         MovieDetailState.Loading -> b.content.isVisible = false
@@ -94,6 +103,32 @@ class MovieDetailActivity : AppCompatActivity() {
         b.clearRatingButton.isVisible = movie.rating != null
         b.favoriteButton.setText(if (movie.isFavorite) R.string.favorite_remove else R.string.favorite_add)
         b.synopsisText.text = movie.synopsis.ifBlank { getString(R.string.no_synopsis) }
+    }
+
+    /**
+     * Boîte « Dans quelles listes ? » : une case à cocher par liste.
+     * Cocher ajoute le film à la liste, décocher l'en retire (immédiatement).
+     */
+    private fun chooseLists() {
+        val lists = vm.watchlists.value
+        if (lists.isEmpty()) {
+            // Aucune liste : on propose directement d'en créer une.
+            showWatchlistDialog(R.string.new_list) { name, description -> vm.createListAndAdd(name, description) }
+            return
+        }
+        val names = lists.map { it.watchlist.name }.toTypedArray<CharSequence>()
+        val members = vm.memberListIds.value
+        val checked = BooleanArray(lists.size) { lists[it].watchlist.id in members }
+        MaterialAlertDialogBuilder(this)
+            .setTitle(R.string.choose_lists)
+            .setMultiChoiceItems(names, checked) { _, which, isChecked ->
+                vm.setInList(lists[which].watchlist.id, isChecked)
+            }
+            .setNeutralButton(R.string.new_list_ellipsis) { _, _ ->
+                showWatchlistDialog(R.string.new_list) { name, description -> vm.createListAndAdd(name, description) }
+            }
+            .setPositiveButton(R.string.done, null)
+            .show()
     }
 
     /** Boîte de confirmation avant une action irréversible. */

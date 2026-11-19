@@ -30,5 +30,23 @@
             android:name=".ui.movie.MovieFormActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+
+        <!-- ÉCRAN 4 — Mes listes -->
+        <activity
+            android:name=".ui.watchlist.WatchlistsActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.catalogue.CatalogueActivity" />
+
+        <!-- ÉCRAN 5 — Détail d'une liste -->
+        <activity
+            android:name=".ui.watchlist.WatchlistDetailActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.watchlist.WatchlistsActivity" />
+
+        <!-- ÉCRAN 6 — Statistiques -->
+        <activity
+            android:name=".ui.stats.StatisticsActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.catalogue.CatalogueActivity" />
     </application>
 </manifest>

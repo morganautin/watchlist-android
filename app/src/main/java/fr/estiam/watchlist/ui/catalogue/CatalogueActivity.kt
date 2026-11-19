@@ -24,6 +24,8 @@ import fr.estiam.watchlist.ui.common.enableCinemaEdgeToEdge
 import fr.estiam.watchlist.ui.common.labelRes
 import fr.estiam.watchlist.ui.movie.MovieDetailActivity
 import fr.estiam.watchlist.ui.movie.MovieFormActivity
+import fr.estiam.watchlist.ui.stats.StatisticsActivity
+import fr.estiam.watchlist.ui.watchlist.WatchlistsActivity
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -152,6 +154,10 @@ class CatalogueActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        // Navigation vers les autres écrans
+        R.id.action_lists -> { startActivity(Intent(this, WatchlistsActivity::class.java)); true }
+        R.id.action_stats -> { startActivity(Intent(this, StatisticsActivity::class.java)); true }
+        // Filtres et tri
         R.id.action_favorites -> { vm.setFavoritesOnly(!item.isChecked); true }
         R.id.sort_title -> { vm.setSort(MovieSort.TITLE); true }
         R.id.sort_year -> { vm.setSort(MovieSort.YEAR); true }

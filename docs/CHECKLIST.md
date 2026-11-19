@@ -4,19 +4,19 @@ Rendu et présentation : **jeudi 26 novembre 2026, 16h**.
 Légende : ✅ fait · 🔄 en cours · ⬜ à faire
 
 ## Interface et navigation (20 %)
-- 🔄 Au moins 5 écrans fonctionnels — 3/7 faits (catalogue, détail film, formulaire film) ; restent mes listes, détail liste, statistiques, paramètres
-- 🔄 Navigation entre les écrans (catalogue ↔ détail ↔ formulaire ✅)
-- ✅ `RecyclerView` pour les collections (catalogue)
-- 🔄 Formulaires avec contrôles de saisie (film ✅, liste à faire)
+- ✅ Au moins 5 écrans fonctionnels — 6/7 faits (catalogue, détail film, formulaire film, mes listes, détail liste, statistiques) ; reste paramètres (étape 4)
+- ✅ Navigation entre les écrans (icônes de la barre du haut + flèche retour)
+- ✅ `RecyclerView` pour les collections (catalogue, listes, films d'une liste)
+- ✅ Formulaires avec contrôles de saisie (film + liste)
 - ✅ Design cohérent (thème bleu nuit / or, clair + sombre)
-- 🔄 États vides et gestion des erreurs (catalogue ✅ : chargement, vide, erreur + Réessayer)
+- ✅ États vides et gestion des erreurs (chargement, vide, erreur + Réessayer, messages)
 - 🔄 Bon comportement à la rotation (ViewModels ✅, à vérifier sur émulateur)
 
 ## Room et architecture (25 %)
 - ✅ 3 entités reliées : Movie, Watchlist, WatchlistItem (étape 1)
-- 🔄 2 CRUD complets : films ✅, listes à faire
+- ✅ 2 CRUD complets : films + listes
 - ✅ DAO et Repositories : `MovieDao`, `WatchlistDao`, implémentations Room (étape 2)
-- 🔄 ViewModels pour l'état des écrans (3 écrans ✅)
+- ✅ ViewModels pour l'état des écrans (un par écran)
 - ✅ Observation réactive avec Flow (détail du film mis à jour automatiquement)
 - ✅ Paging 3 sur le catalogue
 - ✅ Recherche, filtre par genre, favoris et tri
@@ -35,9 +35,9 @@ Légende : ✅ fait · 🔄 en cours · ⬜ à faire
 - ⬜ Conservées après relance
 
 ## Fonctionnalités métier
-- 🔄 Statistiques par genre et par statut (requêtes ✅, écran à faire)
-- 🔄 Progression de chaque liste (requête ✅, écran à faire)
-- ⬜ Données cohérentes après modification (CASCADE ✅)
+- ✅ Statistiques par genre et par statut (écran Statistiques)
+- ✅ Progression de chaque liste (Mes listes + détail d'une liste)
+- ✅ Données cohérentes après modification (CASCADE + mise à jour automatique)
 
 ## Débogage et tests (20 %)
 - ⬜ Utiliser Logcat, points d'arrêt et inspection des variables (garder des captures !)
