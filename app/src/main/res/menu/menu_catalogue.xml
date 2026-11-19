@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Menu (⋮) du catalogue : filtre favoris + choix du tri. -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_favorites"
+        android:checkable="true"
+        android:title="@string/favorites_only"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_sort"
+        android:title="@string/sort"
+        app:showAsAction="never">
+        <menu>
+            <!-- single = boutons radio : un seul tri coché à la fois -->
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/sort_title"
+                    android:title="@string/sort_title" />
+                <item
+                    android:id="@+id/sort_year"
+                    android:title="@string/sort_year" />
+                <item
+                    android:id="@+id/sort_rating"
+                    android:title="@string/sort_rating" />
+            </group>
+        </menu>
+    </item>
+</menu>

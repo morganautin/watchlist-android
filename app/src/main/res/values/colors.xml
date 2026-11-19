@@ -2,5 +2,11 @@
     <!-- Palette "salle de cinéma" : bleu nuit + or des fauteuils -->
     <color name="night_blue">#1C2340</color>
     <color name="cinema_gold">#E0A526</color>
+    <color name="gold_light">#F6E7C4</color>
     <color name="screen_white">#FAF8F3</color>
+    <color name="white">#FFFFFF</color>
+    <color name="danger_red">#B3261E</color>
+
+    <!-- Couleur de la barre du haut (redéfinie en mode sombre dans values-night) -->
+    <color name="toolbar_bg">#1C2340</color>
 </resources>

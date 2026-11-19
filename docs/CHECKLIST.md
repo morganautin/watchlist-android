@@ -4,22 +4,22 @@ Rendu et présentation : **jeudi 26 novembre 2026, 16h**.
 Légende : ✅ fait · 🔄 en cours · ⬜ à faire
 
 ## Interface et navigation (20 %)
-- ⬜ Au moins 5 écrans fonctionnels (objectif 7 : catalogue, détail film, formulaire film, mes listes, détail liste, statistiques, paramètres)
-- ⬜ Navigation entre les écrans
-- ⬜ `RecyclerView` pour les collections
-- ⬜ Formulaires avec contrôles de saisie (film, liste)
-- ⬜ Design cohérent (thème bleu nuit / or)
-- ⬜ États vides (« aucun film », « aucune liste ») et gestion des erreurs
-- ⬜ Bon comportement à la rotation de l'écran
+- 🔄 Au moins 5 écrans fonctionnels — 3/7 faits (catalogue, détail film, formulaire film) ; restent mes listes, détail liste, statistiques, paramètres
+- 🔄 Navigation entre les écrans (catalogue ↔ détail ↔ formulaire ✅)
+- ✅ `RecyclerView` pour les collections (catalogue)
+- 🔄 Formulaires avec contrôles de saisie (film ✅, liste à faire)
+- ✅ Design cohérent (thème bleu nuit / or, clair + sombre)
+- 🔄 États vides et gestion des erreurs (catalogue ✅ : chargement, vide, erreur + Réessayer)
+- 🔄 Bon comportement à la rotation (ViewModels ✅, à vérifier sur émulateur)
 
 ## Room et architecture (25 %)
 - ✅ 3 entités reliées : Movie, Watchlist, WatchlistItem (étape 1)
-- ⬜ 2 CRUD complets : films + listes
+- 🔄 2 CRUD complets : films ✅, listes à faire
 - ✅ DAO et Repositories : `MovieDao`, `WatchlistDao`, implémentations Room (étape 2)
-- ⬜ ViewModels pour l'état des écrans
-- 🔄 Observation réactive avec Flow (côté données ✅, côté écrans à l'étape 3)
-- 🔄 Paging 3 sur le catalogue (requête Room ✅, écran à l'étape 3)
-- 🔄 Recherche, filtre et tri (requête SQL ✅, écran à l'étape 3)
+- 🔄 ViewModels pour l'état des écrans (3 écrans ✅)
+- ✅ Observation réactive avec Flow (détail du film mis à jour automatiquement)
+- ✅ Paging 3 sur le catalogue
+- ✅ Recherche, filtre par genre, favoris et tri
 - 🔄 Données conservées après relance (Room ✅, à démontrer sur émulateur)
 
 ## Import JSON (dans les 15 %)
@@ -42,12 +42,12 @@ Légende : ✅ fait · 🔄 en cours · ⬜ à faire
 ## Débogage et tests (20 %)
 - ⬜ Utiliser Logcat, points d'arrêt et inspection des variables (garder des captures !)
 - ⬜ Documenter 2 bugs (cause + solution) — 1 par membre
-- ✅ Au moins 8 tests JUnit (9 écrits : validation + import JSON)
+- ✅ Au moins 8 tests JUnit (11 écrits : validation, import JSON, formulaire)
 - ⬜ Au moins 3 tests Espresso
 - ⬜ Tous les tests lançables depuis le projet rendu
 
 ## Équipe et qualité (10 %)
-- ⚠️ Équipe de 3 à 4 demandée — actuellement 2 : trouver un membre ou faire valider par le prof
+- ⚠️ Équipe de 3 à 4 demandée — projet réalisé seul : à faire valider par le prof
 - ⬜ Chaque membre contribue (commits depuis son propre compte)
 - ✅ Dépôt GitHub partagé
 - 🔄 Une branche par fonctionnalité + Pull Requests

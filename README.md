@@ -6,8 +6,7 @@ Projet final **ESTIAM E5 — Mobile Apps Development** (Android natif, Kotlin).
 > (architecture, fonctionnalités, tests, contributions).
 
 ## Équipe
-- morganautin
-- _(à compléter)_
+- morganautin (projet réalisé seul)
 
 ## Documentation
 - [Architecture et base de données](docs/ARCHITECTURE.md) — schémas des couches et des relations Room

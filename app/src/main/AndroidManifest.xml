@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- name : classe Application qui créera la base Room et le DataStore -->
+    <!-- name : classe Application qui crée la base Room et les Repositories -->
     <application
         android:name=".WatchListApplication"
         android:allowBackup="true"
@@ -9,14 +9,26 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WatchList">
 
-        <!-- Écran de démarrage de l'application -->
+        <!-- ÉCRAN 1 — Catalogue : écran de démarrage (LAUNCHER) -->
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.catalogue.CatalogueActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- ÉCRAN 2 — Détail d'un film ; parentActivityName = où mène la flèche "retour" -->
+        <activity
+            android:name=".ui.movie.MovieDetailActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.catalogue.CatalogueActivity" />
+
+        <!-- ÉCRAN 3 — Formulaire ; adjustResize = l'écran se réduit quand le clavier s'ouvre -->
+        <activity
+            android:name=".ui.movie.MovieFormActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 </manifest>
