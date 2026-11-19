@@ -1,0 +1,20 @@
+flowchart TB
+    UI["<b>ÉCRANS</b> — Activities XML + RecyclerView<br/>Catalogue · Détail film · Formulaire film · Mes listes<br/>Détail liste · Statistiques · Paramètres"]:::ui
+    VM["<b>VIEWMODELS</b> — état de chaque écran (survit à la rotation)<br/>Catalogue · MovieDetail · MovieForm · Watchlists<br/>WatchlistDetail · Statistics · Settings"]:::vm
+    REPO["<b>REPOSITORIES</b> — interfaces = contrats communs<br/>MovieRepository · WatchlistRepository<br/>StatisticsRepository · SettingsRepository"]:::repo
+    ROOM[("<b>Room</b><br/>movies · watchlists · watchlist_items<br/>DAO + Paging 3 + Flow")]:::data
+    DS[("<b>DataStore</b><br/>thème · tri par défaut<br/>masquer les films vus")]:::data
+    JSON[/"<b>assets/movies.json</b><br/>20+ films, importés une seule fois"/]:::data
+
+    UI -- "actions de l'utilisateur" --> VM
+    VM -- "StateFlow / PagingData<br/>(mise à jour automatique)" --> UI
+    VM -- "appelle les fonctions" --> REPO
+    REPO -- "Flow" --> VM
+    REPO --> ROOM
+    REPO --> DS
+    REPO -. "seedIfNeeded()<br/>validation avant insertion" .-> JSON
+
+    classDef ui fill:#FAF8F3,stroke:#1C2340,color:#1C2340
+    classDef vm fill:#E8EAF2,stroke:#1C2340,color:#1C2340
+    classDef repo fill:#1C2340,stroke:#1C2340,color:#FAF8F3
+    classDef data fill:#F6E7C4,stroke:#E0A526,color:#1C2340
