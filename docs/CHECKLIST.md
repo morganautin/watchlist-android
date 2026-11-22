@@ -52,7 +52,7 @@ Légende : ✅ fait · 🔄 en cours · ⬜ à faire
 - ✅ Dépôt GitHub partagé
 - ✅ Une branche par fonctionnalité + Pull Requests (7 PR)
 - ✅ Messages de commit clairs
-- 🔄 README complet : projet, architecture, installation, fonctionnalités, tests, contributions (captures d'écran à ajouter)
+- ✅ README complet : projet, captures, architecture, installation, fonctionnalités, tests, contributions
 
 ## Livrables et présentation (10 %)
 - ✅ Schéma d'architecture (`docs/ARCHITECTURE.md`)
