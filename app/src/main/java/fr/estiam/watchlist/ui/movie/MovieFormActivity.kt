@@ -94,7 +94,8 @@ class MovieFormActivity : AppCompatActivity() {
 
     /** Copie le film d'origine dans les champs (mode modification). */
     private fun fillFields(movie: Movie) {
-        // Trace visible dans Logcat (filtre : MovieForm) — sert au bug n° 2 de docs/DEBUGGING.md
+        // Trace visible dans Logcat (filtre : MovieForm) : doit apparaître une seule fois,
+        // même après une rotation de l'écran (voir fieldsFilled).
         Log.d(TAG, "Remplissage des champs avec « ${movie.title} »")
         b.titleInput.setText(movie.title)
         b.yearInput.setText(movie.year.toString())

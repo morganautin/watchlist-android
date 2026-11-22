@@ -10,7 +10,7 @@ Légende : ✅ fait · 🔄 en cours · ⬜ à faire
 - ✅ Formulaires avec contrôles de saisie (film + liste)
 - ✅ Design cohérent (thème bleu nuit / or, clair + sombre)
 - ✅ États vides et gestion des erreurs (chargement, vide, erreur + Réessayer, messages)
-- 🔄 Bon comportement à la rotation (ViewModels ✅, à vérifier sur émulateur)
+- ✅ Bon comportement à la rotation (ViewModels, vérifié sur émulateur)
 
 ## Room et architecture (25 %)
 - ✅ 3 entités reliées : Movie, Watchlist, WatchlistItem (étape 1)
@@ -20,7 +20,7 @@ Légende : ✅ fait · 🔄 en cours · ⬜ à faire
 - ✅ Observation réactive avec Flow (détail du film mis à jour automatiquement)
 - ✅ Paging 3 sur le catalogue
 - ✅ Recherche, filtre par genre, favoris et tri
-- 🔄 Données conservées après relance (Room ✅, à démontrer sur émulateur)
+- ✅ Données conservées après relance (Room, vérifié sur émulateur)
 
 ## Import JSON (dans les 15 %)
 - ✅ Fichier `assets/movies.json` : 30 films valides + 3 entrées piégées
@@ -32,7 +32,7 @@ Légende : ✅ fait · 🔄 en cours · ⬜ à faire
 - ✅ 3 préférences persistantes (thème, tri par défaut, masquer les vus)
 - ✅ Au moins 2 visibles (thème de toute l'app, ordre du catalogue ; + films vus masqués)
 - ✅ Mise à jour sans rafraîchissement manuel (Flow DataStore)
-- 🔄 Conservées après relance (DataStore ✅, à démontrer sur émulateur)
+- ✅ Conservées après relance (DataStore, vérifié sur émulateur)
 
 ## Fonctionnalités métier
 - ✅ Statistiques par genre et par statut (écran Statistiques)
@@ -40,19 +40,19 @@ Légende : ✅ fait · 🔄 en cours · ⬜ à faire
 - ✅ Données cohérentes après modification (CASCADE + mise à jour automatique)
 
 ## Débogage et tests (20 %)
-- 🔄 Utiliser Logcat, points d'arrêt et inspection des variables (procédure dans `docs/DEBUGGING.md`, captures à ajouter dans `docs/debug/`)
-- 🔄 Documenter 2 bugs (cause + solution) — rédigés dans `docs/DEBUGGING.md`, captures à ajouter
+- ✅ Utiliser Logcat, points d'arrêt et inspection des variables (captures dans `docs/debug/`)
+- ✅ Documenter 2 bugs (cause + solution) — `docs/DEBUGGING.md`
 - ✅ Au moins 8 tests JUnit (14 écrits : validation, import JSON, formulaire, préférences)
 - ✅ Au moins 3 tests Espresso (formulaire, parcours film, parcours liste)
-- 🔄 Tous les tests lançables depuis le projet rendu (à vérifier sur émulateur)
+- ✅ Tous les tests lançables depuis le projet rendu (14 JUnit + 3 Espresso verts sur émulateur)
 
 ## Équipe et qualité (10 %)
 - ⚠️ Équipe de 3 à 4 demandée — projet réalisé seul : à faire valider par le prof
-- ⬜ Chaque membre contribue (commits depuis son propre compte)
+- ✅ Contributions (projet réalisé seul, commits depuis le compte morganautin)
 - ✅ Dépôt GitHub partagé
-- 🔄 Une branche par fonctionnalité + Pull Requests
-- ⬜ Messages de commit clairs
-- ⬜ README complet : projet, architecture, installation, fonctionnalités, tests, contributions
+- ✅ Une branche par fonctionnalité + Pull Requests (7 PR)
+- ✅ Messages de commit clairs
+- ✅ README complet : projet, captures, architecture, installation, fonctionnalités, tests, contributions
 
 ## Livrables et présentation (10 %)
 - ✅ Schéma d'architecture (`docs/ARCHITECTURE.md`)

@@ -60,8 +60,11 @@ dependencies {
     testImplementation("org.json:json:20240303") // pour tester le parsing JSON hors Android
 
     // --- Tests Espresso (sur émulateur) ---
-    androidTestImplementation("androidx.test.ext:junit:1.2.1")
-    androidTestImplementation("androidx.test:runner:1.6.2")
-    androidTestImplementation("androidx.test:rules:1.6.1")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
+    // Versions 1.7 / 3.7 obligatoires pour les émulateurs Android 16 et plus récents :
+    // les anciennes versions d'Espresso plantent (NoSuchMethodException sur InputManager).
+    androidTestImplementation("androidx.test:core:1.7.0")
+    androidTestImplementation("androidx.test.ext:junit:1.3.0")
+    androidTestImplementation("androidx.test:runner:1.7.0")
+    androidTestImplementation("androidx.test:rules:1.7.0")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.7.0")
 }

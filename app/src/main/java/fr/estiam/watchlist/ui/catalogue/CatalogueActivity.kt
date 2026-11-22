@@ -70,12 +70,20 @@ class CatalogueActivity : AppCompatActivity() {
         // 4. Bouton d'ajout : formulaire vide
         b.addButton.setOnClickListener { startActivity(Intent(this, MovieFormActivity::class.java)) }
 
-        // 5. Observation des données, uniquement quand l'écran est visible (STARTED).
+        // 5. Observation des données.
+        // 5a. Les pages de films → l'adapter.
+        // ⚠️ VOLONTAIREMENT HORS de repeatOnLifecycle (bug n° 2 de docs/DEBUGGING.md) :
+        // si cette collecte est arrêtée quand l'écran passe en arrière-plan, puis relancée
+        // au retour, l'adapter reçoit une seconde fois la même PagingData pendant que Room
+        // la met à jour (film supprimé) → RecyclerView plante (« Inconsistency detected »).
+        // L'adapter Paging gère lui-même le cycle de vie : on le laisse travailler en continu.
+        lifecycleScope.launch {
+            vm.movies.collectLatest { adapter.submitData(it) }
+        }
+
+        // 5b → 5d. Le reste n'est observé que lorsque l'écran est visible (STARTED).
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                // 5a. Les pages de films → l'adapter
-                launch { vm.movies.collectLatest { adapter.submitData(it) } }
-
                 // 5b. État du chargement → chargement / liste vide / erreur
                 launch {
                     adapter.loadStateFlow.collect { state ->

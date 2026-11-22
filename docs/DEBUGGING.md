@@ -48,37 +48,47 @@ Or l'écran ne fait que lire `.value` au moment du clic, sans observer : la requ
 et la valeur restait la valeur initiale `emptyList()`.
 
 **Solution.** Démarrer l'observation dès la création du ViewModel :
-`SharingStarted.Eagerly`. La valeur est alors toujours à jour au moment du clic.
+`SharingStarted.Eagerly`. La valeur est alors toujours à jour au moment du clic,
+et la boîte « Dans quelles listes ? » propose bien les listes existantes.
 
 | Avant | Après |
 |---|---|
-| ![point d'arrêt](debug/bug1-breakpoint.png) | ![corrigé](debug/bug1-corrige.png) |
+| ![point d'arrêt : lists vide](debug/bug1-breakpoint.png) | ![corrigé : les listes sont proposées](debug/bug1-corrige.png) |
 
 ---
 
-### Bug n° 2 — Modifications effacées après rotation dans le formulaire
+### Bug n° 2 — Plantage du catalogue après la suppression d'un film
 
-**Outils utilisés :** Logcat (filtre `MovieForm`) + compréhension du cycle de vie
+**Outils utilisés :** test Espresso `MovieCrudFlowTest` + Logcat (pile d'appels de l'exception)
 
-**Symptôme.** En modifiant un film, je change le titre puis je tourne l'écran :
-le titre revient à sa valeur d'origine, ma saisie est perdue.
+**Symptôme.** Le test Espresso `MovieCrudFlowTest` échouait au moment de confirmer la suppression
+d'un film. En revenant de la fiche du film vers le catalogue, l'application plantait.
 
 **Analyse.**
-1. Trace ajoutée dans `MovieFormActivity.fillFields()` :
-   `Log.d("MovieForm", "Remplissage des champs avec « … »")`.
-2. Logcat, filtre `MovieForm` : le message apparaît **une fois à l'ouverture, puis une seconde fois après la rotation**.
+1. Le test échoue sur le clic « Supprimer » de la boîte de confirmation (`PerformException`).
+2. Dans Logcat, la cause réelle apparaît sous `Caused by` :
+   `IndexOutOfBoundsException: Inconsistency detected. Invalid view holder adapter position … app:id/movieList … MovieAdapter`
+3. Ce n'est donc pas le test qui est en cause : c'est la **RecyclerView du catalogue** (`movieList`)
+   qui plante pendant son affichage, au moment où l'écran revient au premier plan.
 
-**Cause.** À la rotation, Android **détruit et recrée l'Activity** ; le ViewModel, lui, survit.
-La nouvelle Activity observe à nouveau `vm.original`, qui renvoie immédiatement le film d'origine,
-et `fillFields()` réécrit les champs par-dessus la saisie de l'utilisateur.
+**Cause.** Dans `CatalogueActivity`, les pages du catalogue étaient envoyées à l'adapter
+**à l'intérieur de `repeatOnLifecycle(STARTED)`** :
+- quand on ouvre la fiche du film, le catalogue passe en arrière-plan → la collecte est **arrêtée** ;
+- on supprime le film → Room met à jour les données du catalogue pendant ce temps ;
+- au retour, la collecte **redémarre** et renvoie à l'adapter la même `PagingData` encore en cours de mise à jour.
 
-**Solution.** Un indicateur `fieldsFilled` stocké **dans le ViewModel** (qui survit à la rotation) :
-les champs ne sont remplis qu'une seule fois. Après une rotation, Android restaure lui-même
-le texte saisi dans les champs.
+L'adapter et la RecyclerView ne sont plus d'accord sur le nombre de lignes → plantage.
+
+**Solution.** Collecter les pages avec `lifecycleScope.launch { … submitData(it) }`, **en dehors**
+de `repeatOnLifecycle` (méthode recommandée par la documentation Paging 3) :
+l'adapter Paging gère lui-même le cycle de vie et reçoit les mises à jour en continu.
+Les autres observations (état du chargement, filtres, messages) restent liées au cycle de vie.
+
+**Vérification.** Après correction, les 3 tests Espresso passent.
 
 | Avant | Après |
 |---|---|
-| ![logcat avant](debug/bug2-logcat-avant.png) | ![logcat après](debug/bug2-logcat-apres.png) |
+| ![test en échec et Logcat](debug/bug2-test-echec.png) | ![3 tests réussis](debug/bug2-tests-ok.png) |
 
 ---
 
